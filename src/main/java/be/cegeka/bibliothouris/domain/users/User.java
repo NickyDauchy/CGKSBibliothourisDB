@@ -27,6 +27,7 @@ public class User {
         return name;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,5 +44,10 @@ public class User {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    public String getDetailsOfBook(Book book) {
+
+        return "These are the details of the book";
     }
 }

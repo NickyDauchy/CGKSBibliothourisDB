@@ -92,4 +92,12 @@ public class UserTest {
                         .build());
     }
 
+    @Test
+    public void getBookDetails_givenABook_shouldReturnStringWithDetailsOfThatBook() throws Exception {
+
+        Book testBook = new Book();
+
+        Assertions.assertThat(user.getDetailsOfBook(testBook)).isEqualTo("These are the details of the book");
+
+    }
 }
