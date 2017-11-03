@@ -34,16 +34,16 @@ public class UserServiceTest {
 
     @Test
     public void addUser_ShouldCallUserRepository() throws Exception {
-        userService.addUser("Seppe");
+        userService.addUser("Seppe", "password");
 
-        verify(userRepository).addUser(new User( "Seppe"));
+        verify(userRepository).addUser(new User( "Seppe","password"));
     }
 
     @Test
     public void getAllUsers() throws Exception {
-        User user1 = new User( "Seppe");
-        User user2 = new User( "Sanne");
-        User user3 = new User( "Xan");
+        User user1 = new User( "Seppe","password");
+        User user2 = new User( "Sanne","password");
+        User user3 = new User( "Xan","password");
 
         when(userRepository.getAllUsers()).thenReturn(Arrays.asList(user1, user2));
 

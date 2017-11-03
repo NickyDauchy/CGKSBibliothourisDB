@@ -24,7 +24,7 @@ public class UserDetailsWrapper implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "password";
+        return user.getPassword();
     }
 
     @Override

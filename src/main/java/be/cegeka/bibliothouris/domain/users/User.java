@@ -11,12 +11,15 @@ public class User {
     private int id;
     @Column(name = "NAME")
     private String name;
+    @Column(name = "PASSWORD")
+    private String password;
 
     private User(){
     }
 
-    public User(String name) {
+    public User(String name, String password) {
         this.name = name;
+        this.password = password;
     }
 
     public int getId() {
@@ -25,6 +28,10 @@ public class User {
 
     public String getName() {
         return name;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override

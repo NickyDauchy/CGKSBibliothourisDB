@@ -25,8 +25,8 @@ public class UserController {
     }
 
     @PostMapping
-    public void addUser(@RequestParam(value = "name", required = true) String name) {
-        userService.addUser(name);
+    public void addUser(@RequestParam(value = "name", required = true) String name,@RequestParam(value = "password", required = true) String password) {
+        userService.addUser(name,password );
     }
 
 }

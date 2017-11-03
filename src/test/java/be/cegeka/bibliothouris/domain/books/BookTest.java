@@ -29,7 +29,7 @@ public class BookTest {
     }
 
     @Test
-    public void equals_ObjectWithSameIdAndName_IsTrue() throws Exception {
+    public void equals_ObjectWithSameIsbnTitleLastAndFirst_IsTrue() throws Exception {
         assertThat(book).isEqualTo(aBook()
                 .withIsbn("123456")
                 .withTitle("Kikis Day Out")
@@ -76,7 +76,7 @@ public class BookTest {
     public void equals_ObjectWithOtherAuthorFirstName_IsFalse() throws Exception {
         assertThat(book).isNotEqualTo(aBook()
                 .withId(7)
-                .withIsbn("123455")
+                .withIsbn("123456")
                 .withTitle("Kikis Day Out")
                 .withAuthorLastName("Willems")
                 .withAuthorFirstName("Kika")
@@ -87,7 +87,7 @@ public class BookTest {
     public void equals_ObjectWithOtherTitle_IsFalse() throws Exception {
         assertThat(book).isNotEqualTo(aBook()
                 .withId(7)
-                .withIsbn("123455")
+                .withIsbn("123456")
                 .withTitle("Kikis Yummy Day Out")
                 .withAuthorLastName("Willems")
                 .withAuthorFirstName("Kiki")
@@ -98,7 +98,7 @@ public class BookTest {
     public void equals_ObjectWithOtherAuthorLastName_IsFalse() throws Exception {
         assertThat(book).isNotEqualTo(aBook()
                 .withId(7)
-                .withIsbn("123455")
+                .withIsbn("123456")
                 .withTitle("Kikis Day Out")
                 .withAuthorLastName("Williams")
                 .withAuthorFirstName("Kiki")
@@ -145,7 +145,7 @@ public class BookTest {
                 .build()).
                 isNotEqualTo(aBook()
                         .withId(7)
-                        .withIsbn("123455")
+                        .withIsbn("123456")
                         .withTitle("Kikis Day Out")
                         .withAuthorLastName("Willems")
                         .withAuthorFirstName("Kiki")
@@ -193,7 +193,7 @@ public class BookTest {
                 .build()).
                 isNotEqualTo(aBook()
                         .withId(7)
-                        .withIsbn("123455")
+                        .withIsbn("123456")
                         .withTitle("Kikis Day Out")
                         .withAuthorLastName("Willems")
                         .withAuthorFirstName("Kiki")
@@ -241,7 +241,7 @@ public class BookTest {
                 .build()).
                 isNotEqualTo(aBook()
                         .withId(7)
-                        .withIsbn("123455")
+                        .withIsbn("123456")
                         .withTitle("Kikis Day Out")
                         .withAuthorLastName("Willems")
                         .withAuthorFirstName("Kiki")
@@ -288,7 +288,7 @@ public class BookTest {
                 .build()).
                 isNotEqualTo(aBook()
                         .withId(7)
-                        .withIsbn("123455")
+                        .withIsbn("123456")
                         .withTitle("Kikis Day Out")
                         .withAuthorLastName("Willems")
                         .withAuthorFirstName("Kiki")
