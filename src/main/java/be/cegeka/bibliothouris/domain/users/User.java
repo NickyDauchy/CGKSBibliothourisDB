@@ -51,9 +51,4 @@ public class User {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
-
-
-    public String getDetailsOfBook(Book testBook) {
-        return "These are the details of the book";
-    }
 }
