@@ -17,7 +17,23 @@ public class UserTest {
         user = aUser()
                 .withName("Seppe")
                 .withId(10)
+                .withPassWord("password")
                 .build();
+    }
+
+    @Test
+    public void whenGetId_shouldReturnId() throws Exception {
+        assertThat(user.getId()).isEqualTo(10);
+    }
+
+    @Test
+    public void whenGetName_shouldReturnName() throws Exception {
+        assertThat(user.getName()).isEqualTo("Seppe");
+    }
+
+    @Test
+    public void whenGetPassword_shouldReturnPassword() throws Exception {
+        assertThat(user.getPassword()).isEqualTo("password");
     }
 
     @Test
