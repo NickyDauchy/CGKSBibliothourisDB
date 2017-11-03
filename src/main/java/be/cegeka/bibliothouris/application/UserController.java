@@ -2,6 +2,7 @@ package be.cegeka.bibliothouris.application;
 
 import be.cegeka.bibliothouris.domain.users.User;
 import be.cegeka.bibliothouris.domain.users.UserService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
+    @Secured("ROLE_USER")
     public List<User> getUsers() {
         return userService.getAllUsers();
     }
