@@ -11,12 +11,15 @@ public class User {
     private int id;
     @Column(name = "NAME")
     private String name;
+    @Column(name = "PASSWORD")
+    private String password;
 
     private User(){
     }
 
-    public User(String name) {
+    public User(String name, String password) {
         this.name = name;
+        this.password = password;
     }
 
     public int getId() {
@@ -27,6 +30,9 @@ public class User {
         return name;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -46,8 +52,8 @@ public class User {
         return result;
     }
 
-    public String getDetailsOfBook(Book book) {
 
+    public String getDetailsOfBook(Book testBook) {
         return "These are the details of the book";
     }
 }

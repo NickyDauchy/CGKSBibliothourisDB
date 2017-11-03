@@ -11,11 +11,12 @@ public class UserService {
     @Inject
     private UserRepository userRepository;
 
-    public void addUser(String name){
-        userRepository.addUser(new User(name));
+    public void addUser(String name, String password){
+        userRepository.addUser(new User(name, password));
     }
 
     public List<User> getAllUsers() {
         return userRepository.getAllUsers();
     }
+
 }

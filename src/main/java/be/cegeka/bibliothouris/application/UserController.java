@@ -1,5 +1,6 @@
 package be.cegeka.bibliothouris.application;
 
+import be.cegeka.bibliothouris.domain.users.Book;
 import be.cegeka.bibliothouris.domain.users.User;
 import be.cegeka.bibliothouris.domain.users.UserService;
 import org.springframework.security.access.annotation.Secured;
@@ -25,8 +26,8 @@ public class UserController {
     }
 
     @PostMapping
-    public void addUser(@RequestParam(value = "name", required = true) String name) {
-        userService.addUser(name);
+    public void addUser(@RequestParam(value = "name", required = true) String name,@RequestParam(value = "password", required = true) String password) {
+        userService.addUser(name,password );
     }
 
 }

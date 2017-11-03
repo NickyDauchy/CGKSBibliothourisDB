@@ -26,4 +26,6 @@ public class UserRepository {
                 .setParameter("name", name)
                 .getSingleResult();
     }
+
+
 }
