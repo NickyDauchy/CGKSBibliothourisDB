@@ -1,6 +1,5 @@
 package be.cegeka.bibliothouris.application;
 
-import be.cegeka.bibliothouris.domain.users.Book;
 import be.cegeka.bibliothouris.domain.users.User;
 import be.cegeka.bibliothouris.domain.users.UserService;
 import org.springframework.security.access.annotation.Secured;
