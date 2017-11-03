@@ -20,4 +20,10 @@ public class UserRepository {
     public void addUser(User user){
         entityManager.persist(user);
     }
+
+    public User getUserByName(String name) {
+        return entityManager.createQuery("select u from User u where u.name like :name", User.class)
+                .setParameter("name", name)
+                .getSingleResult();
+    }
 }
