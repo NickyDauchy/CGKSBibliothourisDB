@@ -1,6 +1,6 @@
 package be.cegeka.bibliothouris.domain.books;
 
-import be.cegeka.bibliothouris.domain.users.Book;
+import be.cegeka.bibliothouris.domain.books.Book;
 
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -21,6 +21,14 @@ public class BookRepository {
 //        find '?' wildcard for single character
 //        find '*' wildcard for multiple characters
 
-        return entityManager.createQuery("Select b from Book b where b.isbn like ?isbn? ",Book.class).getResultList();
+        return entityManager.createQuery("Select b from Book b where b.isbn like %isbn% ",Book.class).getResultList();
+    }
+
+    public void addBook(Book book) {
+        entityManager.persist(book);
+    }
+
+    public List<Book> getAllBooks() {
+        return entityManager.createQuery("Select b from Book b",Book.class).getResultList();
     }
 }
