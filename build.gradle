@@ -77,6 +77,7 @@ dependencies {
     compile 'org.slf4j:log4j-over-slf4j:1.7.25'
     compile 'joda-time:joda-time:2.9.9'
     compile 'javax.inject:javax.inject:1'
+    compile "org.flywaydb:flyway-core:4.2.0"
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile 'junit:junit:4.12'
