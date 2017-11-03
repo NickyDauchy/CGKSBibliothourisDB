@@ -2,7 +2,6 @@ package be.cegeka.bibliothouris.domain.books;
 
 import org.junit.Before;
 import org.junit.Test;
-//import static be.cegeka.bibliothouris.domain.books.BookTestBuilder.aBook;
 import static be.cegeka.bibliothouris.domain.books.BookTestBuilder.aBook;
 import static org.junit.Assert.*;
 import org.assertj.core.api.Assertions;
