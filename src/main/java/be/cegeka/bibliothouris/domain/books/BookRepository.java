@@ -13,16 +13,16 @@ public class BookRepository {
     private EntityManager entityManager;
 
 
-    public List<Book> searchBookByISBN(String isbn) {
+//    public List<Book> searchBookByISBN(String isbn) {
 
 //        String searchExpression=isbn;
 //        String searchExpression;
 //        String searchExpression=searchExpression.replace('*','%');
 //        find '?' wildcard for single character
 //        find '*' wildcard for multiple characters
-
-        return entityManager.createQuery("Select b from Book b where b.isbn like %isbn% ",Book.class).getResultList();
-    }
+//
+//        return entityManager.createQuery("Select b from Book b where b.isbn like '%isbn%' ",Book.class).getResultList();
+//    }
 
     public void addBook(Book book) {
         entityManager.persist(book);
