@@ -14,6 +14,13 @@ public class BookRepository {
 
 
     public List<Book> searchBookByISBN(String isbn) {
-        return entityManager.createQuery("Select books from books where isbn like '%isbn%'",Book.class).getResultList();
+
+//        String searchExpression=isbn;
+//        String searchExpression;
+//        String searchExpression=searchExpression.replace('*','%');
+//        find '?' wildcard for single character
+//        find '*' wildcard for multiple characters
+
+        return entityManager.createQuery("Select b from Book b where b.isbn like ?isbn? ",Book.class).getResultList();
     }
 }
