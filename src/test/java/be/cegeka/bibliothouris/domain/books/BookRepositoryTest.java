@@ -46,8 +46,13 @@ public class BookRepositoryTest {
         Assertions.assertThat(bookRepository.getAllBooks()).contains(testboek1,testboek2);
     }
 
+//    @Test
+//    public void testSearchBookByISBN123ReturnsBookCreatedWithISBN123() throws Exception {
+//        Assertions.assertThat(bookRepository.searchBookByISBN("123")).containsOnly(testboek1);
+//    }
+
     @Test
-    public void testSearchBookByISBN123ReturnsBookCreatedWithISBN123() throws Exception {
-        Assertions.assertThat(bookRepository.searchBookByISBN("123")).containsOnly(testboek1);
+    public void getAllBooksContains2BooksFromBefore() throws Exception {
+        Assertions.assertThat(bookRepository.getAllBooks()).contains(testboek2,testboek1);
     }
 }
