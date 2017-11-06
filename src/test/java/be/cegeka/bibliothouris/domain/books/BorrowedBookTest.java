@@ -11,7 +11,7 @@ public class BorrowedBookTest {
 
     @Before
     public void setUp() throws Exception {
-        borrowedBook=new BorrowedBook(1,1, java.sql.Date.valueOf(LocalDate.now()),java.sql.Date.valueOf(LocalDate.now().plusWeeks(3)),null);
+        borrowedBook=new BorrowedBook(1,1, java.sql.Date.valueOf(LocalDate.now()),java.sql.Date.valueOf(LocalDate.now().plusWeeks(3)));
     }
 
     @Test

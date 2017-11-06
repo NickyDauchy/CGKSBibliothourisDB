@@ -57,4 +57,9 @@ public class BookController {
     public List<Book> searchBookByAuthor(@RequestParam(value = "author", required = true) String author) {
         return bookService.searchBookByAuthor(author);
     }
+    @RequestMapping(path="/borrowBook")
+    @PostMapping
+    public void borrowBook(@RequestParam(value="bookid",required = true)int bookid,@RequestParam(value="userid",required = true)int userid){
+        bookService.borrowBook(bookid,userid);
+    }
 }

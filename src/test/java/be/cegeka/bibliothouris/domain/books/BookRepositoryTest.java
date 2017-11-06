@@ -49,9 +49,10 @@ public class BookRepositoryTest {
         testboek1=new Book("a123a","testbook1","romeo","mattia");
         testboek2=new Book("789","testbook2","romeo","mattia");
         testboek3=new Book("afvo123", "testbook3", "willems", "kiki");
-        testborrowedboek1=new BorrowedBook(0,0, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)),null);
-        testborrowedboek1=new BorrowedBook(1,0, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)),null);
-        testborrowedboek1=new BorrowedBook(2,0, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)),null);
+
+        testborrowedboek1=new BorrowedBook(1,1, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)));
+        testborrowedboek2=new BorrowedBook(2,1, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)));
+        testborrowedboek3=new BorrowedBook(3,1, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)));
 
 
         entityManager.persist(testboek1);
@@ -144,9 +145,8 @@ public class BookRepositoryTest {
         Assertions.assertThat(actual).isEmpty();
     }
 
-
     @Test
     public void addBorrowedBookToBorrowedBookTable() throws Exception {
-        Assertions.assertThat(bookRepository.getAllBorrowedBooks()).contains(testborrowedboek1);
+        Assertions.assertThat(bookRepository.getAllBorrowedBooks()).contains(testborrowedboek1,testborrowedboek2,testborrowedboek3);
     }
 }

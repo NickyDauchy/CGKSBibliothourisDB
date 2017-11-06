@@ -26,12 +26,11 @@ public class BorrowedBook {
 
     }
 
-    public BorrowedBook(int bookid, int userid, Date startdate, Date duedate, Date returndate) {
+    public BorrowedBook(int bookid, int userid, Date startdate, Date duedate) {
         this.bookid = bookid;
         this.userid = userid;
         this.startdate = startdate;
         this.duedate = duedate;
-        this.returndate = returndate;
     }
 
     public int getId() {

@@ -52,7 +52,7 @@ public class BookRepository {
                 .getResultList();
     }
 
-    public void BorrowBook(BorrowedBook borrowedBook){
+    public void borrowBook(BorrowedBook borrowedBook){
         entityManager.persist(borrowedBook);
     }
     public List<BorrowedBook> getAllBorrowedBooks(){
