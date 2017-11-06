@@ -15,10 +15,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static javafx.scene.input.KeyCode.L;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,9 +40,9 @@ public class BookRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
-        testboek1=new Book("a123a","testbook1","romeo","mattia");
-        testboek2=new Book("789","testbook2","romeo","mattia");
-        testboek3=new Book("afvo123", "testbook3", "willems", "kiki");
+        testboek1 = new Book("a123a", "testbook1", "romeo", "mattia");
+        testboek2 = new Book("789", "testbook2", "romeo", "mattia");
+        testboek3 = new Book("afvo123", "testbook3", "willems", "kiki");
 
         entityManager.persist(testboek1);
         entityManager.persist(testboek2);
@@ -48,31 +51,62 @@ public class BookRepositoryTest {
 
     @Test
     public void addBookToRepository() throws Exception {
-        Assertions.assertThat(bookRepository.getAllBooks()).contains(testboek1,testboek2);
+        assertThat(bookRepository.getAllBooks()).contains(testboek1, testboek2);
     }
 
     @Test
     public void testSearchBookByISBN123ReturnsBookCreatedWithISBN123() throws Exception {
-        List<Book> actual = bookRepository.searchBookByISBN("123");
+        List<Book> actual = bookRepository.searchBookByISBN("?123?");
 
-        Assertions.assertThat(actual).contains(testboek3, testboek1);
+        assertThat(actual).contains(testboek3, testboek1);
     }
+
     @Test
     public void testSearchBookByISBN123ReturnsBookCreatedWithISBNa() throws Exception {
-        List<Book> actual = bookRepository.searchBookByISBN("a");
+        List<Book> actual = bookRepository.searchBookByISBN("*a*");
 
-        Assertions.assertThat(actual).contains(testboek3, testboek1);
+        assertThat(actual).contains(testboek3, testboek1);
     }
 
+    @Test
+    public void searchBookByISBN123_asterisk_aShouldReturnCorrectBook() throws Exception {
+        List<Book> actual = bookRepository.searchBookByISBN("a*");
 
+        Assertions.assertThat(actual).contains(testboek1);
+    }
+    @Test
+    public void searchBookByISBN1_3_ShouldReturnCorrectBook() throws Exception {
+        List<Book> actual = bookRepository.searchBookByISBN("*1?3*");
+
+        Assertions.assertThat(actual).contains(testboek1,testboek3);
+    }
 
     @Test
     public void getAllBooksContains2BooksFromBefore() throws Exception {
-        Assertions.assertThat(bookRepository.getAllBooks()).contains(testboek2,testboek1);
+        assertThat(bookRepository.getAllBooks()).contains(testboek2, testboek1);
     }
 
     @Test
     public void getBookDetailsById_ShouldReturnAllDetailsOfBookWithSaidId() throws Exception {
-        Assertions.assertThat(bookRepository.getBookDetails(testboek1.getId())).isEqualTo(testboek1);
+        assertThat(bookRepository.getBookDetails(testboek1.getId())).isEqualTo(testboek1);
+    }
+
+    @Test
+    public void whenGivenPartOfTitle_shouldReturnListOfBooksWithMatchingTitlePart() throws Exception {
+        List<Book> actual = bookRepository.searchBookByTitle("Test");
+
+        assertThat(actual).contains(testboek2);
+    }
+
+    @Test
+    public void whenGivenPartOfTitleOfMultipleBooks_shouldReturnAllBooks() throws Exception {
+        List<Book> actual = bookRepository.searchBookByTitle("Erwin");
+        assertThat(actual).isEmpty();
+    }
+    @Test
+    public void searchBookByISBN____ShouldReturnCorrectBook() throws Exception {
+        List<Book> actual = bookRepository.searchBookByISBN("???");
+
+        Assertions.assertThat(actual).contains(testboek1,testboek3);
     }
 }

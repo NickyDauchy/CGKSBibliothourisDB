@@ -45,7 +45,17 @@ public class BookServiceTest {
 
         when(bookRepository.searchBookByISBN("34")).thenReturn(Arrays.asList(book1, book2));
 
-        Assertions.assertThat(bookService.searchBookByISBN("34")).containsOnly(book1, book2);
+        assertThat(bookService.searchBookByISBN("34")).containsOnly(book1, book2);
+    }
+
+    @Test
+    public void whenGivenPartOfTitle_shouldCallBookrepositorie() throws Exception {
+        Book book1 = new Book("123456", "Kikis Day Out", "Willems", "Kiki");
+        Book book2 = new Book("123456", "Kikis Day Out", "Willems", "Kiki");
+
+        when(bookRepository.searchBookByTitle("Day")).thenReturn(Arrays.asList(book1, book2));
+
+        assertThat(bookService.searchBookByTitle("Day")).containsOnly(book1, book2);
     }
 
     @Test
