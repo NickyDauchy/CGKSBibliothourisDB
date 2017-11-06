@@ -27,6 +27,22 @@ public class Book {
         this.authorFirstName = authorFirstName;
     }
 
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthorLastName() {
+        return authorLastName;
+    }
+
+    public String getAuthorFirstName() {
+        return authorFirstName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
