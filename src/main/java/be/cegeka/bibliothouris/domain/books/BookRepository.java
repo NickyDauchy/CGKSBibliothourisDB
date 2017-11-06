@@ -25,6 +25,7 @@ public class BookRepository {
     }
 
     public List<Book> searchBookByTitle(String title){
+        title = title.replace('?', '%');
         title = title.replace('*','%');
 
         return  entityManager.createQuery("Select b from Book b where b.title like :title",Book.class)
@@ -42,5 +43,14 @@ public class BookRepository {
 
     public Book getBookDetails(int id){
         return entityManager.find(Book.class, id);
+    }
+
+    public List<Book> searchBookByAuthor(String author) {
+        author = author.replace('?','%');
+        author = author.replace('*','%');
+
+        return  entityManager.createQuery("Select b from Book b where concat(b.authorFirstName, b.authorLastName) like :author or concat(b.authorLastName, b.authorFirstName) like :author" ,Book.class)
+                .setParameter("author","%"+author+"%")
+                .getResultList();
     }
 }

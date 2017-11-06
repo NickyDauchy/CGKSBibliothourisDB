@@ -51,4 +51,10 @@ public class BookController {
     public List<Book> searchBookByTitle(@RequestParam(value = "title", required = true) String title) {
         return bookService.searchBookByTitle(title);
     }
+
+    @RequestMapping(path = "/searchBookByAuthor")
+    @GetMapping
+    public List<Book> searchBookByAuthor(@RequestParam(value = "author", required = true) String author) {
+        return bookService.searchBookByAuthor(author);
+    }
 }

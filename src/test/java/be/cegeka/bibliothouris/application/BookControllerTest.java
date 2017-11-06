@@ -78,4 +78,15 @@ public class BookControllerTest {
 
         Assertions.assertThat(bookController.searchBookByTitle("Day")).containsOnly(book1, book2);
     }
+
+    @Test
+    public void searchBookByAuthor_ShouldCallBookService() throws Exception {
+        Book book1 = new Book("123456", "Kikis Day Out", "Willems", "Kiki");
+        Book book2 = new Book("123457", "Kikis Day Out Volume 2", "Willems", "Kiki");
+
+        when(bookService.searchBookByAuthor("ski")).thenReturn(Arrays.asList(book1, book2));
+
+        Assertions.assertThat(bookController.searchBookByAuthor("ski")).containsOnly(book1, book2);
+    }
+
 }
