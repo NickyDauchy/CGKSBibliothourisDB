@@ -108,4 +108,8 @@ public class UserTest {
                         .build());
     }
 
+    @Test
+    public void whenGetInss_shouldReturnInss() throws Exception {
+
+    }
 }

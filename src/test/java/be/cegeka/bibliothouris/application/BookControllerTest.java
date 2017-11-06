@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 
 public class BookControllerTest {
 
-    @Rule
+   @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
     @InjectMocks
