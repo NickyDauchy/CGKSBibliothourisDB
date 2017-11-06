@@ -26,6 +26,7 @@ public class BookController {
 
     @RequestMapping(path="/addBook")
     @PostMapping
+    @Secured("ROLE_LIBRARIAN")
     public void addBook(@RequestParam(value = "isbn", required = true) String ISBN,
                         @RequestParam(value = "title", required = true) String title,
                         @RequestParam(value = "authorLastName", required = true) String authorLastName,
