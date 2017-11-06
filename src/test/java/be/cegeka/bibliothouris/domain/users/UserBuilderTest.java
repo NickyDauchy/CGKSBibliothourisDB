@@ -14,9 +14,9 @@ public class UserBuilderTest {
     @Before
     public void setUp() throws Exception {
         userBuilder = new UserBuilder();
-        testUser = userBuilder.withName("Ralph").withPassWord("abc").withUserRole().build();
+        testUser = userBuilder.withName("Ralph").withId(5).withPassWord("abc").withUserRole().build();
         userBuilder = new UserBuilder();
-        testLibrarian = userBuilder.withName("Erwin").withPassWord("cba").withLibrarianRole().build();
+        testLibrarian = userBuilder.withName("Erwin").withId(6).withPassWord("cba").withLibrarianRole().build();
     }
 
     @Test
@@ -39,5 +39,11 @@ public class UserBuilderTest {
     @Test
     public void withLibrarianRole_shouldGiveUserAndLibrarianRoleToCreatedUser() throws Exception {
         assertThat(testLibrarian.getRole()).isEqualTo("LIBRARIAN");
+    }
+
+    @Test
+    public void withId_shouldAddIDtoCreatedUser() throws Exception {
+        assertThat(testUser.getId()).isEqualTo(testUser.getId());
+
     }
 }
