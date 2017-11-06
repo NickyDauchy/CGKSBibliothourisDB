@@ -1,7 +1,5 @@
 package be.cegeka.bibliothouris.domain.books;
 
-import be.cegeka.bibliothouris.domain.books.Book;
-
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,12 +14,10 @@ public class BookRepository {
     public List<Book> searchBookByISBN(String isbn) {
         isbn=isbn.replace('?','%');
         isbn=isbn.replace('*','%');
-        
+
         return entityManager.createQuery("Select b from Book b where b.isbn like :isbn",Book.class)
                 .setParameter("isbn", isbn )
                 .getResultList();
-
-
     }
 
     public void addBook(Book book) {
@@ -34,5 +30,12 @@ public class BookRepository {
 
     public Book getBookDetails(int id){
         return entityManager.find(Book.class, id);
+    }
+
+    public void BorrowBook(BorrowedBook borrowedBook){
+        entityManager.persist(borrowedBook);
+    }
+    public List<BorrowedBook> getAllBorrowedBooks(){
+        return entityManager.createQuery("select c from BorrowedBook c",BorrowedBook.class).getResultList();
     }
 }

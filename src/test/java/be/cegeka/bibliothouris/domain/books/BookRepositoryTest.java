@@ -15,6 +15,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static javafx.scene.input.KeyCode.L;
@@ -34,16 +37,26 @@ public class BookRepositoryTest {
     private Book testboek1;
     private Book testboek2;
     private Book testboek3;
+    private BorrowedBook testborrowedboek1;
+    private BorrowedBook testborrowedboek2;
+    private BorrowedBook testborrowedboek3;
 
     @Before
     public void setUp() throws Exception {
         testboek1=new Book("a123a","testbook1","romeo","mattia");
         testboek2=new Book("789","testbook2","romeo","mattia");
         testboek3=new Book("afvo123", "testbook3", "willems", "kiki");
+        testborrowedboek1=new BorrowedBook(0,0, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)),null);
+        testborrowedboek1=new BorrowedBook(1,0, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)),null);
+        testborrowedboek1=new BorrowedBook(2,0, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)),null);
+
 
         entityManager.persist(testboek1);
         entityManager.persist(testboek2);
         entityManager.persist(testboek3);
+        entityManager.persist(testborrowedboek1);
+        entityManager.persist(testborrowedboek2);
+        entityManager.persist(testborrowedboek3);
     }
 
 
@@ -92,5 +105,10 @@ public class BookRepositoryTest {
         List<Book> actual = bookRepository.searchBookByISBN("???");
 
         Assertions.assertThat(actual).contains(testboek1,testboek3);
+    }
+
+    @Test
+    public void addBorrowedBookToBorrowedBookTable() throws Exception {
+        Assertions.assertThat(bookRepository.getAllBorrowedBooks()).contains(testborrowedboek1);
     }
 }
