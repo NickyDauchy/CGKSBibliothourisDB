@@ -56,16 +56,29 @@ public class BookRepositoryTest {
 
     @Test
     public void testSearchBookByISBN123ReturnsBookCreatedWithISBN123() throws Exception {
-        List<Book> actual = bookRepository.searchBookByISBN("123");
+        List<Book> actual = bookRepository.searchBookByISBN("?123?");
 
         assertThat(actual).contains(testboek3, testboek1);
     }
 
     @Test
     public void testSearchBookByISBN123ReturnsBookCreatedWithISBNa() throws Exception {
-        List<Book> actual = bookRepository.searchBookByISBN("a");
+        List<Book> actual = bookRepository.searchBookByISBN("*a*");
 
         assertThat(actual).contains(testboek3, testboek1);
+    }
+
+    @Test
+    public void searchBookByISBN123_asterisk_aShouldReturnCorrectBook() throws Exception {
+        List<Book> actual = bookRepository.searchBookByISBN("a*");
+
+        Assertions.assertThat(actual).contains(testboek1);
+    }
+    @Test
+    public void searchBookByISBN1_3_ShouldReturnCorrectBook() throws Exception {
+        List<Book> actual = bookRepository.searchBookByISBN("*1?3*");
+
+        Assertions.assertThat(actual).contains(testboek1,testboek3);
     }
 
     @Test
@@ -89,5 +102,11 @@ public class BookRepositoryTest {
     public void whenGivenPartOfTitleOfMultipleBooks_shouldReturnAllBooks() throws Exception {
         List<Book> actual = bookRepository.searchBookByTitle("Erwin");
         assertThat(actual).isEmpty();
+    }
+    @Test
+    public void searchBookByISBN____ShouldReturnCorrectBook() throws Exception {
+        List<Book> actual = bookRepository.searchBookByISBN("???");
+
+        Assertions.assertThat(actual).contains(testboek1,testboek3);
     }
 }
