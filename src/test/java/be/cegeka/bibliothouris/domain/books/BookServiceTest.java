@@ -44,4 +44,12 @@ public class BookServiceTest {
 
         assertThat(bookService.getAllBooks()).containsOnly(book1, book2, book3);
     }
+
+    @Test
+    public void getBookDetailsById_ShouldReturnAllDetailsOfBookWithSaidId() throws Exception {
+        Book testboek1 = new Book("123", "testbook1", "romeo", "mattia");
+        when(bookRepository.getBookDetails(testboek1.getId())).thenReturn(testboek1);
+
+        assertThat(bookService.getBookDetails(testboek1.getId())).isEqualTo(testboek1);
+    }
 }

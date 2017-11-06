@@ -7,7 +7,7 @@ import java.util.List;
 @Named
 public class BookService {
     @Inject
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
 
 //    public List<Book> searchBookByISBN(String isbn) {
 //        return bookRepository.searchBookByISBN(isbn);
@@ -20,5 +20,9 @@ public class BookService {
 
     public List<Book> getAllBooks() {
         return bookRepository.getAllBooks();
+    }
+
+    public Book getBookDetails(int id) {
+        return bookRepository.getBookDetails(id);
     }
 }

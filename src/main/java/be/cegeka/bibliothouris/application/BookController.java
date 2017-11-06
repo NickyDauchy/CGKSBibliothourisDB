@@ -35,4 +35,10 @@ public class BookController {
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
+
+    @RequestMapping(path = "/getBookDetails")
+    @GetMapping
+    public Book getBookDetails(@RequestParam (value = "id", required = true) int id) {
+        return bookService.getBookDetails(id);
+    }
 }
