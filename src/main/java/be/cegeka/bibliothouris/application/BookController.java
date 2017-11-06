@@ -42,24 +42,28 @@ public class BookController {
 
     @RequestMapping(path = "/getAllBooks")
     @GetMapping
+    @Secured("ROLE_USER")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
     @RequestMapping(path = "/getBookDetails")
     @GetMapping
+    @Secured("ROLE_USER")
     public Book getBookDetails(@RequestParam(value = "id", required = true) int id) {
         return bookService.getBookDetails(id);
     }
 
     @RequestMapping(path = "/searchBookByTitle")
     @GetMapping
+    @Secured("ROLE_USER")
     public List<Book> searchBookByTitle(@RequestParam(value = "title", required = true) String title) {
         return bookService.searchBookByTitle(title);
     }
 
     @RequestMapping(path = "/searchBookByAuthor")
     @GetMapping
+    @Secured("ROLE_USER")
     public List<Book> searchBookByAuthor(@RequestParam(value = "author", required = true) String author) {
         return bookService.searchBookByAuthor(author);
     }

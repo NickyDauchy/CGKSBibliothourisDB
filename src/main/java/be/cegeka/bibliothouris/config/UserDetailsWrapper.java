@@ -22,10 +22,10 @@ public class UserDetailsWrapper implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
         if (user.getRole().equals("USER") || user.getRole().equals("LIBRARIAN")) {
-            authorityList.add(new SimpleGrantedAuthority("USER"));
+            authorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
         if (user.getRole().equals("LIBRARIAN")) {
-            authorityList.add(new SimpleGrantedAuthority("LIBRARIAN"));
+            authorityList.add(new SimpleGrantedAuthority("ROLE_LIBRARIAN"));
         }
         return authorityList;
 
