@@ -32,6 +32,14 @@ public class BookRepository {
 
     }
 
+    public List<Book> searchBookByTitle(String title){
+        title = title.replace('*','%');
+
+        return  entityManager.createQuery("Select b from Book b where b.title like :title",Book.class)
+                .setParameter("title","%"+title+"%")
+                .getResultList();
+    }
+
     public void addBook(Book book) {
         entityManager.persist(book);
     }

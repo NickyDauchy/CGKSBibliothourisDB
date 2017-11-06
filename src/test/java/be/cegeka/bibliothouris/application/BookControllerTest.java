@@ -53,7 +53,7 @@ public class BookControllerTest {
     }
 
     @Test
-    public void searchBookByISBN_ShouldCallBookrepository() throws Exception {
+    public void searchBookByISBN_ShouldCallBookService() throws Exception {
         Book book1 = new Book("123456", "Kikis Day Out", "Willems", "Kiki");
         Book book2 = new Book("123457", "Kikis Day Out Volume 2", "Willems", "Kiki");
 
@@ -69,4 +69,13 @@ public class BookControllerTest {
         assertThat(bookController.getBookDetails(testboek1.getId())).isEqualTo(testboek1);
     }
 
+    @Test
+    public void searchBookByTitle_ShouldCallBookService() throws Exception {
+        Book book1 = new Book("123456", "Kikis Day Out", "Willems", "Kiki");
+        Book book2 = new Book("123457", "Kikis Day Out Volume 2", "Willems", "Kiki");
+
+        when(bookService.searchBookByTitle("Day")).thenReturn(Arrays.asList(book1, book2));
+
+        Assertions.assertThat(bookController.searchBookByTitle("Day")).containsOnly(book1, book2);
+    }
 }

@@ -23,7 +23,7 @@ public class BookController {
     }
 
 
-    @RequestMapping(path="/addBook")
+    @RequestMapping(path = "/addBook")
     @PostMapping
     public void addBook(@RequestParam(value = "isbn", required = true) String ISBN,
                         @RequestParam(value = "title", required = true) String title,
@@ -40,7 +40,13 @@ public class BookController {
 
     @RequestMapping(path = "/getBookDetails")
     @GetMapping
-    public Book getBookDetails(@RequestParam (value = "id", required = true) int id) {
+    public Book getBookDetails(@RequestParam(value = "id", required = true) int id) {
         return bookService.getBookDetails(id);
+    }
+
+    @RequestMapping(path = "/searchBookByTitle")
+    @GetMapping
+    public List<Book> searchBookByTitle(@RequestParam(value = "title", required = true) String title) {
+        return bookService.searchBookByTitle(title);
     }
 }
