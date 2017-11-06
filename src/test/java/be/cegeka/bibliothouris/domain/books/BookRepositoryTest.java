@@ -15,6 +15,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import java.util.List;
+
 import static javafx.scene.input.KeyCode.L;
 import static org.junit.Assert.*;
 
@@ -31,14 +33,17 @@ public class BookRepositoryTest {
     private EntityManager entityManager;
     private Book testboek1;
     private Book testboek2;
+    private Book testboek3;
 
     @Before
     public void setUp() throws Exception {
-        testboek1=new Book("123","testbook1","romeo","mattia");
+        testboek1=new Book("a123a","testbook1","romeo","mattia");
         testboek2=new Book("789","testbook2","romeo","mattia");
+        testboek3=new Book("afvo123", "testbook3", "willems", "kiki");
 
         entityManager.persist(testboek1);
         entityManager.persist(testboek2);
+        entityManager.persist(testboek3);
     }
 
     @Test
@@ -46,10 +51,20 @@ public class BookRepositoryTest {
         Assertions.assertThat(bookRepository.getAllBooks()).contains(testboek1,testboek2);
     }
 
-//    @Test
-//    public void testSearchBookByISBN123ReturnsBookCreatedWithISBN123() throws Exception {
-//        Assertions.assertThat(bookRepository.searchBookByISBN("123")).containsOnly(testboek1);
-//    }
+    @Test
+    public void testSearchBookByISBN123ReturnsBookCreatedWithISBN123() throws Exception {
+        List<Book> actual = bookRepository.searchBookByISBN("123");
+
+        Assertions.assertThat(actual).contains(testboek3, testboek1);
+    }
+    @Test
+    public void testSearchBookByISBN123ReturnsBookCreatedWithISBNa() throws Exception {
+        List<Book> actual = bookRepository.searchBookByISBN("a");
+
+        Assertions.assertThat(actual).contains(testboek3, testboek1);
+    }
+
+
 
     @Test
     public void getAllBooksContains2BooksFromBefore() throws Exception {

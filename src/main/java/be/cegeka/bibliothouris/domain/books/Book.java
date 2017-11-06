@@ -27,6 +27,10 @@ public class Book {
         this.authorFirstName = authorFirstName;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getIsbn() {
         return isbn;
     }
@@ -66,9 +70,5 @@ public class Book {
         result = 31 * result + (authorLastName != null ? authorLastName.hashCode() : 0);
         result = 31 * result + (authorFirstName != null ? authorFirstName.hashCode() : 0);
         return result;
-    }
-
-    public int getId() {
-        return id;
     }
 }
