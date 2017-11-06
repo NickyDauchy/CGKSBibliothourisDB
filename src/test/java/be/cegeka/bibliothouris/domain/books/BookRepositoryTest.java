@@ -70,4 +70,9 @@ public class BookRepositoryTest {
     public void getAllBooksContains2BooksFromBefore() throws Exception {
         Assertions.assertThat(bookRepository.getAllBooks()).contains(testboek2,testboek1);
     }
+
+    @Test
+    public void getBookDetailsById_ShouldReturnAllDetailsOfBookWithSaidId() throws Exception {
+        Assertions.assertThat(bookRepository.getBookDetails(testboek1.getId())).isEqualTo(testboek1);
+    }
 }
