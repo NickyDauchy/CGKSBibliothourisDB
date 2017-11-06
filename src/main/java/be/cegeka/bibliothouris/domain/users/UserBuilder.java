@@ -3,18 +3,12 @@ package be.cegeka.bibliothouris.domain.users;
 public class UserBuilder {
 
     private String name;
-    private int id;
     private String password;
     private String role;
 
     public User build(){
         User user = new User(name, password, role);
         return user;
-    }
-
-    public UserBuilder withId(int id) {
-        this.id = id;
-        return this;
     }
 
     public UserBuilder withName(String name) {

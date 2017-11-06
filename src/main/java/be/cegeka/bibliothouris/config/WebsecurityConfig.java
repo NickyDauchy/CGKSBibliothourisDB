@@ -15,7 +15,7 @@ import javax.inject.Named;
 import static org.springframework.http.HttpMethod.POST;
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebsecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Inject
