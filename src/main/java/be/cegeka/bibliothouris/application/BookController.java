@@ -23,7 +23,10 @@ public class BookController {
 //    }
     @RequestMapping(path="/addBook")
     @PostMapping
-    public void addBook(@RequestParam(value="isbn",required = true)String ISBN,@RequestParam(value="title",required = true)String title,@RequestParam(value="authorLastName",required = true)String authorLastName,@RequestParam(value="authorFirstName",required = true)String authorFirstName){
+    public void addBook(@RequestParam(value="isbn",required = true)String ISBN,
+                        @RequestParam(value="title",required = true)String title,
+                        @RequestParam(value="authorLastName",required = true)String authorLastName,
+                        @RequestParam(value="authorFirstName",required = true)String authorFirstName){
         bookService.addBook(ISBN,title,authorLastName,authorFirstName);
     }
 }
