@@ -2,9 +2,12 @@ package be.cegeka.bibliothouris.domain.books;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import static be.cegeka.bibliothouris.domain.books.BookTestBuilder.aBook;
 import static org.junit.Assert.*;
+
 import org.assertj.core.api.Assertions;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BookTest {
@@ -20,6 +23,31 @@ public class BookTest {
                 .withAuthorFirstName("Kiki")
                 .withId(7)
                 .build();
+    }
+
+    @Test
+    public void whenGetIsbn_shouldReturnIsbn() throws Exception {
+        assertThat(book.getIsbn()).isEqualTo("123456");
+    }
+
+    @Test
+    public void whenGetAthorFirstName_shouldReturnAuthorFirstName() throws Exception {
+        assertThat(book.getAuthorFirstName()).isEqualTo("Kiki");
+    }
+
+    @Test
+    public void whenGetAuthorLastName_shouldReturnAuthorLastName() throws Exception {
+        assertThat(book.getAuthorLastName()).isEqualTo("Willems");
+    }
+
+    @Test
+    public void whenGetTitle_shouldReturnTitle() throws Exception {
+        assertThat(book.getTitle()).isEqualTo("Kikis Day Out");
+    }
+
+    @Test
+    public void whenGetId_shouldReturnId() throws Exception {
+        assertThat(book.getId()).isEqualTo(7);
     }
 
     @Test

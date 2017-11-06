@@ -27,6 +27,26 @@ public class Book {
         this.authorFirstName = authorFirstName;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthorLastName() {
+        return authorLastName;
+    }
+
+    public String getAuthorFirstName() {
+        return authorFirstName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,9 +70,5 @@ public class Book {
         result = 31 * result + (authorLastName != null ? authorLastName.hashCode() : 0);
         result = 31 * result + (authorFirstName != null ? authorFirstName.hashCode() : 0);
         return result;
-    }
-
-    public int getId() {
-        return id;
     }
 }
