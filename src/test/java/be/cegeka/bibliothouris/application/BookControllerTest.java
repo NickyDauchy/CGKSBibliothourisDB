@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 
 public class BookControllerTest {
 
-    @Rule
+   @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
     @InjectMocks
@@ -41,6 +41,14 @@ public class BookControllerTest {
 
         verify(bookService).addBook("12345", "Erwins angels", "Boegiewoegie", "Erwin");
     }
+
+    @Test
+    public void whenAddBookWithoutAuthorFirstName_shouldReturnBookService() throws Exception {
+        bookController.addBook("12345", "Erwins angels", "Boegiewoegie",null);
+
+        verify(bookService).addBook("12345", "Erwins angels", "Boegiewoegie");
+    }
+
 
     @Test
     public void getAllBooks() throws Exception {

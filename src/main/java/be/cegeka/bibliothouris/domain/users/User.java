@@ -6,7 +6,6 @@ import javax.persistence.*;
 @Table(name = "USERS")
 public class User {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,8 +15,36 @@ public class User {
     private String password;
     @Column(name = "ROLE")
     private String role;
+    @Column(name = "INSS")
+    private String inss;
+    @Column(name = "LASTNAME")
+    private String lastName;
+    @Column(name = "FIRSTNAME")
+    private String firstName;
+    @Column(name = "STREET")
+    private String street;
+    @Column(name = "HOUSENUMBER")
+    private String houseNumber;
+    @Column(name = "POSTALCODE")
+    private String postalCode;
+    @Column(name = "CITY")
+    private String city;
 
     public User() {
+    }
+
+    public User(String name, String password, String role, String inss, String lastName,
+                String firstName, String street, String houseNumber, String postalCode, String city) {
+        this.name = name;
+        this.password = password;
+        this.role = role;
+        this.inss = inss;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.postalCode = postalCode;
+        this.city = city;
     }
 
     public User(String name, String password, String role) {
@@ -36,6 +63,34 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getInss() {
+        return inss;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public String getCity() {
+        return city;
     }
 
     @Override

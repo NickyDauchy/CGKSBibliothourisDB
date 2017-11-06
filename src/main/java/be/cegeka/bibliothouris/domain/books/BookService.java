@@ -22,6 +22,11 @@ public class BookService {
         bookRepository.borrowBook(new BorrowedBook(bookid,userid,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3))));
     }
 
+    public void addBook(String isbn, String title, String authorLastName) {
+        bookRepository.addBook(new Book(isbn, title, authorLastName, ""));
+    }
+
+
     public List<Book> getAllBooks() {
         return bookRepository.getAllBooks();
     }

@@ -43,13 +43,19 @@ public class BookRepositoryTest {
     private BorrowedBook testborrowedboek1;
     private BorrowedBook testborrowedboek2;
     private BorrowedBook testborrowedboek3;
+    private Book testboek4;
 
     @Before
     public void setUp() throws Exception {
-        testboek1=new Book("a123a","testbook1","romeo","mattia");
-        testboek2=new Book("789","testbook2","romeo","mattia");
-        testboek3=new Book("afvo123", "testbook3", "willems", "kiki");
+        testboek1 = new Book("a123a", "testbook1", "romeo", "mattia");
+        testboek2 = new Book("789", "testbook2", "romeo", "mattia");
+        testboek3 = new Book("afvo123", "testbook3", "willems", "kiki");
+        testboek4 = new Book("999555", "Best day ever", "Gielen", null);
 
+        bookRepository.addBook(testboek1);
+        bookRepository.addBook(testboek2);
+        bookRepository.addBook(testboek3);
+        bookRepository.addBook(testboek4);
         testborrowedboek1=new BorrowedBook(1,1, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)));
         testborrowedboek2=new BorrowedBook(2,1, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)));
         testborrowedboek3=new BorrowedBook(3,1, Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3)));
