@@ -43,6 +43,14 @@ public class BookControllerTest {
     }
 
     @Test
+    public void whenAddBookWithoutAuthorFirstName_shouldReturnBookService() throws Exception {
+        bookController.addBook("12345", "Erwins angels", "Boegiewoegie",null);
+
+        verify(bookService).addBook("12345", "Erwins angels", "Boegiewoegie");
+    }
+
+
+    @Test
     public void getAllBooks() throws Exception {
         Book book1 = new Book("12345", "Erwins angels", "Boegiewoegie", "Erwin");
         Book book2 = new Book("12346", "Erwins devils", "Boegiewoegie", "Erwin");

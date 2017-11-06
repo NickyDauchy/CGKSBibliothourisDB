@@ -17,6 +17,10 @@ public class BookService {
         bookRepository.addBook(new Book(isbn, title, authorLastName, authorFirstName));
     }
 
+    public void addBook(String isbn, String title, String authorLastName) {
+        bookRepository.addBook(new Book(isbn, title, authorLastName, ""));
+    }
+
 
     public List<Book> getAllBooks() {
         return bookRepository.getAllBooks();

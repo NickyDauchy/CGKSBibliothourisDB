@@ -37,16 +37,19 @@ public class BookRepositoryTest {
     private Book testboek1;
     private Book testboek2;
     private Book testboek3;
+    private Book testboek4;
 
     @Before
     public void setUp() throws Exception {
         testboek1 = new Book("a123a", "testbook1", "romeo", "mattia");
         testboek2 = new Book("789", "testbook2", "romeo", "mattia");
         testboek3 = new Book("afvo123", "testbook3", "willems", "kiki");
+        testboek4 = new Book("999555", "Best day ever", "Gielen", null);
 
-        entityManager.persist(testboek1);
-        entityManager.persist(testboek2);
-        entityManager.persist(testboek3);
+        bookRepository.addBook(testboek1);
+        bookRepository.addBook(testboek2);
+        bookRepository.addBook(testboek3);
+        bookRepository.addBook(testboek4);
     }
 
     @Test

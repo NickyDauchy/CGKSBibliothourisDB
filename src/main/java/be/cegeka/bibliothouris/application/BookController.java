@@ -30,9 +30,15 @@ public class BookController {
     public void addBook(@RequestParam(value = "isbn", required = true) String ISBN,
                         @RequestParam(value = "title", required = true) String title,
                         @RequestParam(value = "authorLastName", required = true) String authorLastName,
-                        @RequestParam(value = "authorFirstName", required = true) String authorFirstName) {
-        bookService.addBook(ISBN, title, authorLastName, authorFirstName);
+                        @RequestParam(value = "authorFirstName", required = false) String authorFirstName) {
+        if (authorFirstName != null) {
+            bookService.addBook(ISBN, title, authorLastName, authorFirstName);
+        } else {
+            bookService.addBook(ISBN, title, authorLastName);
+        }
     }
+
+
 
     @RequestMapping(path = "/getAllBooks")
     @GetMapping
