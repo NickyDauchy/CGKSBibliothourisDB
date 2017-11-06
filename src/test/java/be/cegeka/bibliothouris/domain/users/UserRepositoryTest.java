@@ -10,10 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -33,7 +30,8 @@ public class UserRepositoryTest {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private User seppe, kiki;
+    private User seppe, kiki,user, librarian;
+    private UserBuilder userBuilder = new UserBuilder();
 
     @Before
     public void setup(){
@@ -47,8 +45,12 @@ public class UserRepositoryTest {
     @Test
     public void getAllUsers() throws Exception {
         List<User> users = userRepository.getAllUsers();
+        Query query = entityManager.createQuery("select u from User u");
 
-        assertThat(users).containsOnly(seppe, kiki);
+        user = userRepository.getUserByName("USER");
+        librarian = userRepository.getUserByName("LIBRARIAN");
+
+        assertThat( query.getResultList()).containsOnly(seppe,kiki,user,librarian);
     }
 
     @Test

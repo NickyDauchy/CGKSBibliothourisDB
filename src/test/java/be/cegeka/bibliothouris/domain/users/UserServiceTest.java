@@ -1,23 +1,16 @@
 package be.cegeka.bibliothouris.domain.users;
 
-import org.assertj.core.api.Assertions;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-import org.springframework.test.util.ReflectionTestUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicLong;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -32,18 +25,26 @@ public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    private UserBuilder userBuilder;
+
+    @Before
+    public void setUp() throws Exception {
+        userBuilder = new UserBuilder();
+    }
+
+
     @Test
     public void addUser_ShouldCallUserRepository() throws Exception {
         userService.addUser("Seppe", "password");
 
-        verify(userRepository).addUser(new User( "Seppe","password"));
+        verify(userRepository).addUser(userBuilder.withName("Seppe").withPassWord("password").withUserRole().build());
     }
 
     @Test
     public void getAllUsers() throws Exception {
-        User user1 = new User( "Seppe","password");
-        User user2 = new User( "Sanne","password");
-        User user3 = new User( "Xan","password");
+        User user1 = userBuilder.withName("Seppe").withPassWord("password").withUserRole().build();
+        User user2 = userBuilder.withName("Sanne").withPassWord("password").withUserRole().build();
+        User user3 = userBuilder.withName("Xan").withPassWord("password").withUserRole().build();
 
         when(userRepository.getAllUsers()).thenReturn(Arrays.asList(user1, user2));
 

@@ -25,4 +25,12 @@ public class BookService {
     public Book getBookDetails(int id) {
         return bookRepository.getBookDetails(id);
     }
+
+    public List<Book> searchBookByTitle(String title) {
+        return bookRepository.searchBookByTitle(title);
+    }
+
+    public List<Book> searchBookByAuthor(String author) {
+        return bookRepository.searchBookByAuthor(author);
+    }
 }

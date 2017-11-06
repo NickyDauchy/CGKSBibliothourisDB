@@ -2,6 +2,7 @@ package be.cegeka.bibliothouris.application;
 
 import be.cegeka.bibliothouris.domain.books.BookService;
 import be.cegeka.bibliothouris.domain.books.Book;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -23,8 +24,9 @@ public class BookController {
     }
 
 
-    @RequestMapping(path="/addBook")
+    @RequestMapping(path = "/addBook")
     @PostMapping
+    @Secured("ROLE_LIBRARIAN")
     public void addBook(@RequestParam(value = "isbn", required = true) String ISBN,
                         @RequestParam(value = "title", required = true) String title,
                         @RequestParam(value = "authorLastName", required = true) String authorLastName,
@@ -40,7 +42,19 @@ public class BookController {
 
     @RequestMapping(path = "/getBookDetails")
     @GetMapping
-    public Book getBookDetails(@RequestParam (value = "id", required = true) int id) {
+    public Book getBookDetails(@RequestParam(value = "id", required = true) int id) {
         return bookService.getBookDetails(id);
+    }
+
+    @RequestMapping(path = "/searchBookByTitle")
+    @GetMapping
+    public List<Book> searchBookByTitle(@RequestParam(value = "title", required = true) String title) {
+        return bookService.searchBookByTitle(title);
+    }
+
+    @RequestMapping(path = "/searchBookByAuthor")
+    @GetMapping
+    public List<Book> searchBookByAuthor(@RequestParam(value = "author", required = true) String author) {
+        return bookService.searchBookByAuthor(author);
     }
 }
