@@ -46,6 +46,7 @@ public class BookRepositoryTest {
         entityManager.persist(testboek3);
     }
 
+
     @Test
     public void addBookToRepository() throws Exception {
         Assertions.assertThat(bookRepository.getAllBooks()).contains(testboek1,testboek2);
@@ -53,18 +54,29 @@ public class BookRepositoryTest {
 
     @Test
     public void testSearchBookByISBN123ReturnsBookCreatedWithISBN123() throws Exception {
-        List<Book> actual = bookRepository.searchBookByISBN("123");
+        List<Book> actual = bookRepository.searchBookByISBN("?123?");
 
         Assertions.assertThat(actual).contains(testboek3, testboek1);
     }
     @Test
     public void testSearchBookByISBN123ReturnsBookCreatedWithISBNa() throws Exception {
-        List<Book> actual = bookRepository.searchBookByISBN("a");
+        List<Book> actual = bookRepository.searchBookByISBN("*a*");
 
         Assertions.assertThat(actual).contains(testboek3, testboek1);
     }
 
+    @Test
+    public void searchBookByISBN123_asterisk_aShouldReturnCorrectBook() throws Exception {
+        List<Book> actual = bookRepository.searchBookByISBN("a*");
 
+        Assertions.assertThat(actual).contains(testboek1);
+    }
+    @Test
+    public void searchBookByISBN1_3_ShouldReturnCorrectBook() throws Exception {
+        List<Book> actual = bookRepository.searchBookByISBN("*1?3*");
+
+        Assertions.assertThat(actual).contains(testboek1,testboek3);
+    }
 
     @Test
     public void getAllBooksContains2BooksFromBefore() throws Exception {
@@ -74,5 +86,11 @@ public class BookRepositoryTest {
     @Test
     public void getBookDetailsById_ShouldReturnAllDetailsOfBookWithSaidId() throws Exception {
         Assertions.assertThat(bookRepository.getBookDetails(testboek1.getId())).isEqualTo(testboek1);
+    }
+    @Test
+    public void searchBookByISBN____ShouldReturnCorrectBook() throws Exception {
+        List<Book> actual = bookRepository.searchBookByISBN("???");
+
+        Assertions.assertThat(actual).contains(testboek1,testboek3);
     }
 }
