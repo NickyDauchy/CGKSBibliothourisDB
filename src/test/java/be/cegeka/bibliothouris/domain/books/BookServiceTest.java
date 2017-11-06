@@ -75,6 +75,7 @@ public class BookServiceTest {
         verify(bookRepository).addBook(new Book("12345", "Erwins angels", "Boegiewoegie", "Erwin"));
     }
 
+
     @Test
     public void getAllBooks() throws Exception {
         Book book1 = new Book("12345", "Erwins angels", "Boegiewoegie", "Erwin");

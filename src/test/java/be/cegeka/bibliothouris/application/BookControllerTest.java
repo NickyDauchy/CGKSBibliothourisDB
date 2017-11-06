@@ -97,4 +97,9 @@ public class BookControllerTest {
         Assertions.assertThat(bookController.searchBookByAuthor("ski")).containsOnly(book1, book2);
     }
 
+    @Test
+    public void borrowBookShouldCallBookService() throws Exception {
+        bookController.borrowBook(1, 1);
+        verify(bookService).borrowBook(1, 1);
+    }
 }

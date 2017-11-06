@@ -38,8 +38,6 @@ public class BookController {
         }
     }
 
-
-
     @RequestMapping(path = "/getAllBooks")
     @GetMapping
     @Secured("ROLE_USER")
