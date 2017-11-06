@@ -51,4 +51,8 @@ public class Book {
         result = 31 * result + (authorFirstName != null ? authorFirstName.hashCode() : 0);
         return result;
     }
+
+    public int getId() {
+        return id;
+    }
 }
