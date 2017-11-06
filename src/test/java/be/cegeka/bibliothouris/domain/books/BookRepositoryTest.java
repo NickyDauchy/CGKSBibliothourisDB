@@ -109,4 +109,26 @@ public class BookRepositoryTest {
 
         Assertions.assertThat(actual).contains(testboek1,testboek3);
     }
+
+    @Test
+    public void searchBookByAuthorPartLastAndFirstName_ShouldReturnCorrectBooks() throws Exception {
+        List<Book> actual = bookRepository.searchBookByAuthor("oma");
+
+        Assertions.assertThat(actual).contains(testboek2, testboek1);
+    }
+
+    @Test
+    public void searchBookByAuthorPartFirstAndLastName_ShouldReturnCorrectBooks() throws Exception {
+        List<Book> actual = bookRepository.searchBookByAuthor("iar");
+
+        Assertions.assertThat(actual).contains(testboek2, testboek1);
+    }
+
+    @Test
+    public void searchBookByUnexistingAuthor_ShouldReturnEmptyList() throws Exception {
+        List<Book> actual = bookRepository.searchBookByAuthor("ele");
+
+        Assertions.assertThat(actual).isEmpty();
+    }
+
 }
