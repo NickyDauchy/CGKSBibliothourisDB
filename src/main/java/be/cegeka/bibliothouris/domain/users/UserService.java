@@ -3,7 +3,6 @@ package be.cegeka.bibliothouris.domain.users;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Named
 public class UserService {
@@ -11,8 +10,10 @@ public class UserService {
     @Inject
     private UserRepository userRepository;
 
+
     public void addUser(String name, String password){
-        userRepository.addUser(new User(name, password));
+        UserBuilder userBuilder = new UserBuilder();
+        userRepository.addUser(userBuilder.withName(name).withPassWord(password).withUserRole().build());
     }
 
     public List<User> getAllUsers() {

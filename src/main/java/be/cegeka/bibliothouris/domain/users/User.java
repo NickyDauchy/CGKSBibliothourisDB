@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "USERS")
 public class User {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -13,13 +14,16 @@ public class User {
     private String name;
     @Column(name = "PASSWORD")
     private String password;
+    @Column(name = "ROLE")
+    private String role;
 
-    private User(){
+    public User() {
     }
 
-    public User(String name, String password) {
+    public User(String name, String password, String role) {
         this.name = name;
         this.password = password;
+        this.role = role;
     }
 
     public int getId() {
@@ -51,4 +55,10 @@ public class User {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+
 }
