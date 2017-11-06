@@ -5,21 +5,30 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class UserDetailsWrapper implements UserDetails {
 
     private User user;
 
-    public UserDetailsWrapper(User user){
+    public UserDetailsWrapper(User user) {
         this.user = user;
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("USER"));
+        List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
+        if (user.getRole().equals("USER") || user.getRole().equals("LIBRARIAN")) {
+            authorityList.add(new SimpleGrantedAuthority("USER"));
+        }
+        if (user.getRole().equals("LIBRARIAN")) {
+            authorityList.add(new SimpleGrantedAuthority("LIBRARIAN"));
+        }
+        return authorityList;
+
     }
 
     @Override

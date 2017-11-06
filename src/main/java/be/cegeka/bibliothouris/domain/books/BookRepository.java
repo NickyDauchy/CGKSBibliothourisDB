@@ -13,16 +13,25 @@ public class BookRepository {
     private EntityManager entityManager;
 
 
-//    public List<Book> searchBookByISBN(String isbn) {
+    public List<Book> searchBookByISBN(String isbn) {
+        isbn=isbn.replace('?','%');
+        isbn=isbn.replace('*','%');
+        
+        return entityManager.createQuery("Select b from Book b where b.isbn like :isbn",Book.class)
+                .setParameter("isbn", isbn )
+                .getResultList();
 
-//        String searchExpression=isbn;
-//        String searchExpression;
-//        String searchExpression=searchExpression.replace('*','%');
-//        find '?' wildcard for single character
-//        find '*' wildcard for multiple characters
-//
-//        return entityManager.createQuery("Select b from Book b where b.isbn like '%isbn%' ",Book.class).getResultList();
-//    }
+
+    }
+
+    public List<Book> searchBookByTitle(String title){
+        title = title.replace('?', '%');
+        title = title.replace('*','%');
+
+        return  entityManager.createQuery("Select b from Book b where b.title like :title",Book.class)
+                .setParameter("title","%"+title+"%")
+                .getResultList();
+    }
 
     public void addBook(Book book) {
         entityManager.persist(book);
@@ -34,5 +43,14 @@ public class BookRepository {
 
     public Book getBookDetails(int id){
         return entityManager.find(Book.class, id);
+    }
+
+    public List<Book> searchBookByAuthor(String author) {
+        author = author.replace('?','%');
+        author = author.replace('*','%');
+
+        return  entityManager.createQuery("Select b from Book b where concat(b.authorFirstName, b.authorLastName) like :author or concat(b.authorLastName, b.authorFirstName) like :author" ,Book.class)
+                .setParameter("author","%"+author+"%")
+                .getResultList();
     }
 }
