@@ -31,11 +31,11 @@ public class BorrowedBookTest {
 
     @Test
     public void getStartDateOfBorrowedBook() throws Exception {
-        Assertions.assertThat(borrowedBook.getStartdate()).isEqualTo("2017-11-06");
+        Assertions.assertThat(borrowedBook.getStartdate()).isEqualTo(java.sql.Date.valueOf(LocalDate.now()));
     }
 
     @Test
     public void getDueDateOfBorrowedBook() throws Exception {
-        Assertions.assertThat(borrowedBook.getDuedate()).isEqualTo("2017-11-27");
+        Assertions.assertThat(borrowedBook.getDuedate()).isEqualTo(java.sql.Date.valueOf(LocalDate.now().plusWeeks(3)));
     }
 }
