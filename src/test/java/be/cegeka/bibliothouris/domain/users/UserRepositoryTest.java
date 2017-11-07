@@ -29,14 +29,14 @@ public class UserRepositoryTest {
 
     @PersistenceContext
     private EntityManager entityManager;
+    private UserBuilder userBuilder= new UserBuilder();
 
     private User seppe, kiki,user, librarian, admin;
-    private UserBuilder userBuilder = new UserBuilder();
 
     @Before
     public void setup(){
-        seppe = aUser().withName("Seppe").build();
-        kiki = aUser().withName("Kiki").build();
+        seppe = aUser().withName("Seppe").withInns("123").withCity("leuven").withLastName("Gielen").build();
+        kiki = aUser().withName("Kiki").withInns("12533").withCity("leuven").withLastName("Willems").build();
 
         entityManager.persist(seppe);
         entityManager.persist(kiki);
