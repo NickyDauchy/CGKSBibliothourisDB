@@ -1,5 +1,8 @@
 package be.cegeka.bibliothouris.domain.users;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 public class UserBuilder {
 
     private String name;
@@ -12,6 +15,8 @@ public class UserBuilder {
     private String houseNumber;
     private String postalCode;
     private String city;
+
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public User buildFull() {
         User user = new User(name, password, role, inss,
@@ -31,7 +36,7 @@ public class UserBuilder {
     }
 
     public UserBuilder withPassWord(String password) {
-        this.password = password;
+        this.password = passwordEncoder.encode(password);
         return this;
     }
 
