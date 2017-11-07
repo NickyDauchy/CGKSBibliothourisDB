@@ -17,15 +17,13 @@ public class BookController {
     @Inject
     private BookService bookService;
 
-    @RequestMapping(path = "/searchBookByISBN")
-    @GetMapping
+//    @RequestMapping
+    @GetMapping(path = "/searchBookByISBN")
     public List<Book> searchBookByISBN(@RequestParam(value = "ISBN", required = true) String ISBN) {
         return bookService.searchBookByISBN(ISBN);
     }
 
-
-    @RequestMapping(path = "/addBook")
-    @PostMapping
+    @PostMapping(path = "/addBook")
     @Secured("ROLE_LIBRARIAN")
     public void addBook(@RequestParam(value = "isbn", required = true) String ISBN,
                         @RequestParam(value = "title", required = true) String title,
@@ -38,35 +36,31 @@ public class BookController {
         }
     }
 
-    @RequestMapping(path = "/getAllBooks")
-    @GetMapping
+    @GetMapping(path = "/getAllBooks")
     @Secured("ROLE_USER")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
-    @RequestMapping(path = "/getBookDetails")
-    @GetMapping
+    @GetMapping(path = "/getBookDetails")
     @Secured("ROLE_USER")
     public Book getBookDetails(@RequestParam(value = "id", required = true) int id) {
         return bookService.getBookDetails(id);
     }
 
-    @RequestMapping(path = "/searchBookByTitle")
-    @GetMapping
+    @GetMapping(path = "/searchBookByTitle")
     @Secured("ROLE_USER")
     public List<Book> searchBookByTitle(@RequestParam(value = "title", required = true) String title) {
         return bookService.searchBookByTitle(title);
     }
 
-    @RequestMapping(path = "/searchBookByAuthor")
-    @GetMapping
+    @GetMapping(path = "/searchBookByAuthor")
     @Secured("ROLE_USER")
     public List<Book> searchBookByAuthor(@RequestParam(value = "author", required = true) String author) {
         return bookService.searchBookByAuthor(author);
     }
-    @RequestMapping(path="/borrowBook")
-    @PostMapping
+
+    @PostMapping(path="/borrowBook")
     public void borrowBook(@RequestParam(value="bookid",required = true)int bookid,@RequestParam(value="userid",required = true)int userid){
         bookService.borrowBook(bookid,userid);
     }
