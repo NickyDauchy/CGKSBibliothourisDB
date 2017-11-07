@@ -28,16 +28,32 @@ public class UserControllerTest {
 
     @Test
     public void whenAddUser_shouldActivateUserService() throws Exception {
-        userController.addRegisteredUser("hello kitty","1234");
-        verify(userService).addUser("hello kitty","1234");
+        userController.addRegisteredUser("Seppe",
+                "password",
+                "INSS",
+                "Dauchy",
+                "Nicky",
+                "whatever",
+                "11",
+                "2840",
+                "Muizen");
+        verify(userService).addUser("Seppe",
+                "password",
+                "INSS",
+                "Dauchy",
+                "Nicky",
+                "whatever",
+                "11",
+                "2840",
+                "Muizen");
     }
 
     @Test
     public void whenGettingUsers_shouldReturnListOfAllUsers() throws Exception {
-        User user1 = new User("jeroen","jeroen","ADMIN");
-        User user2 = new User("len","len","LIBRARIAN");
+        User user1 = new User("jeroen", "jeroen", "ADMIN");
+        User user2 = new User("len", "len", "LIBRARIAN");
 
-        when(userService.getAllUsers()).thenReturn(Arrays.asList(user1,user2));
+        when(userService.getAllUsers()).thenReturn(Arrays.asList(user1, user2));
         Assertions.assertThat(userController.getUsers()).containsOnly(user1, user2);
     }
 }
