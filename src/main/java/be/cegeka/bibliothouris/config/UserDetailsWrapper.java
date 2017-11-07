@@ -27,6 +27,9 @@ public class UserDetailsWrapper implements UserDetails {
         if (user.getRole().equals("LIBRARIAN")) {
             authorityList.add(new SimpleGrantedAuthority("ROLE_LIBRARIAN"));
         }
+        if (user.getRole().equals("ADMIN")) {
+            authorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
         return authorityList;
 
     }
