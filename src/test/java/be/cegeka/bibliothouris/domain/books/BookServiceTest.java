@@ -1,6 +1,7 @@
 package be.cegeka.bibliothouris.domain.books;
 
 import org.assertj.core.api.Assertions;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -94,4 +95,41 @@ public class BookServiceTest {
 
         assertThat(bookService.getBookDetails(testboek1.getId())).isEqualTo(testboek1);
     }
+
+    @Test
+    public void validateISBN_givenNullISBN_shouldReturnFalse() throws Exception {
+        assertThat(bookService.validateISBN(null)).isFalse();
+    }
+
+
+    @Test
+    public void validateISBN_givenISBN_longerThanThirteenDigits_shouldReturnFalse() throws Exception {
+        assertThat(bookService.validateISBN("123456789123456")).isFalse();
+    }
+
+    @Test
+    public void validateISBN_givenISBN_shorterThanThirteenDigits_shouldReturnFalse() throws Exception {
+        assertThat(bookService.validateISBN("1236")).isFalse();
+    }
+
+    @Test
+    public void validateISBN_givenSomethingElseThanNumerics_shouldReturnFalse() throws Exception {
+        assertThat(bookService.validateISBN("123456eeeeeee1")).isFalse();
+    }
+
+    @Test
+    public void validateISBN_givenISBNChecksumWillReturnFalse_shouldReturnFalse() throws Exception {
+        assertThat(bookService.validateISBN("1232145698741")).isFalse();
+    }
+
+    @Test
+    public void validateISBN_givenValidPuurPascale2ISBN_shouldReturnTrue() throws Exception {
+        assertThat(bookService.validateISBN("9789401443944")).isTrue();
+    }
+
+    @Test
+    public void validateISBN_givenCleanCodeISBN_shouldReturnTrue() throws Exception {
+        assertThat(bookService.validateISBN("978-0-13-235088-4")).isTrue();
+    }
+
 }
