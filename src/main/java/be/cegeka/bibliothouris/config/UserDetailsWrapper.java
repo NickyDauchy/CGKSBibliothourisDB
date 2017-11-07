@@ -21,17 +21,16 @@ public class UserDetailsWrapper implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
-        if (user.getRole().equals("USER") || user.getRole().equals("LIBRARIAN")) {
+        if (user.getRole().equals("USER") || user.getRole().equals("LIBRARIAN")|| user.getRole().equals("ADMIN")) {
             authorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
-        if (user.getRole().equals("LIBRARIAN")) {
+        if (user.getRole().equals("LIBRARIAN") || user.getRole().equals("ADMIN")) {
             authorityList.add(new SimpleGrantedAuthority("ROLE_LIBRARIAN"));
         }
         if (user.getRole().equals("ADMIN")) {
             authorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
         return authorityList;
-
     }
 
     @Override
