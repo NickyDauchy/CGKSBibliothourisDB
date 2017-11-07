@@ -25,7 +25,14 @@ public class UserController {
 
     @PostMapping
     public void addRegisteredUser(@RequestParam(value = "name", required = true) String name,
-                        @RequestParam(value = "password", required = true) String password) {
+                        @RequestParam(value = "password", required = true) String password,
+                        @RequestParam(value = "password", required = true) String password,
+                        @RequestParam(value = "password", required = true) String password,
+                        @RequestParam(value = "password", required = true) String password,
+                        @RequestParam(value = "password", required = true) String password,
+                        @RequestParam(value = "password", required = true) String password,
+                        @RequestParam(value = "password", required = true) String password,
+    ) {
         userService.addUser(name, password);
     }
 
