@@ -51,8 +51,11 @@ public class BookControllerTest {
         verify(bookService).addBook("9789401443944", "Erwins angels", "Boegiewoegie");
     }
 
-
-
+    @Test(expected = IllegalArgumentException.class)
+    public void whenInvalidISBNReturnsFalse_shouldThrowIllegalArgumentExeption() throws Exception {
+        when(bookService.validateISBN("9789401443944")).thenReturn(false);
+        bookController.addBook("9789401443944", "Erwins angels", "Boegiewoegie",null);
+    }
 
     @Test
     public void getAllBooks() throws Exception {
