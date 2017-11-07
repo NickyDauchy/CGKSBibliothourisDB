@@ -1,6 +1,8 @@
 package be.cegeka.bibliothouris.application;
 
+import be.cegeka.bibliothouris.domain.users.User;
 import be.cegeka.bibliothouris.domain.users.UserService;
+import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -8,8 +10,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class UserControllerTest {
     @Rule
@@ -22,9 +27,17 @@ public class UserControllerTest {
     private UserService userService;
 
     @Test
-    public void whenAddBook_shouldReturnBookService() throws Exception {
+    public void whenAddUser_shouldActivateUserService() throws Exception {
         userController.addRegisteredUser("hello kitty","1234");
-
         verify(userService).addUser("hello kitty","1234");
+    }
+
+    @Test
+    public void whenGettingUsers_shouldReturnListOfAllUsers() throws Exception {
+        User user1 = new User("jeroen","jeroen","ADMIN");
+        User user2 = new User("len","len","LIBRARIAN");
+
+        when(userService.getAllUsers()).thenReturn(Arrays.asList(user1,user2));
+        Assertions.assertThat(userController.getUsers()).containsOnly(user1, user2);
     }
 }

@@ -18,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN"})
     public List<User> getUsers() {
         return userService.getAllUsers();
     }
@@ -28,5 +28,4 @@ public class UserController {
                         @RequestParam(value = "password", required = true) String password) {
         userService.addUser(name, password);
     }
-
 }
