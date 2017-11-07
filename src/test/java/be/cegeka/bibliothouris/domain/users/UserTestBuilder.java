@@ -26,7 +26,7 @@ public class UserTestBuilder {
     }
 
     public User build() {
-        User user = new User(name, password, "USER");
+        User user = new User(name, password, "USER",inss,lastname,firstname,street,houseNumber,postalCode,city);
         ReflectionTestUtils.setField(user, "id", id);
         return user;
     }
