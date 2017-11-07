@@ -2,6 +2,9 @@ package be.cegeka.bibliothouris.domain.users;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,6 +13,8 @@ public class UserBuilderTest {
     private User testUser;
     private User testLibrarian;
     private User testFullUser;
+
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Before
     public void setUp() throws Exception {
@@ -38,8 +43,7 @@ public class UserBuilderTest {
 
     @Test
     public void withPassword_givenPassword_shouldAddPasswordToCreatedUser() throws Exception {
-        assertThat(testUser.getPassword()).isEqualTo("abc");
-        assertThat(testLibrarian.getPassword()).isEqualTo("cba");
+        assertThat(passwordEncoder.matches("abc", testUser.getPassword())).isTrue();
     }
 
     @Test

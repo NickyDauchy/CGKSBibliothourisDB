@@ -18,23 +18,24 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping(path = "/searchBookByISBN")
-    public List<Book> searchBookByISBN(@RequestParam(value = "ISBN", required = true) String ISBN) {
-        return bookService.searchBookByISBN(ISBN);
+    @Secured("ROLE_USER")
+    public List<Book> searchBookByISBN(@RequestParam(value = "isbn", required = true) String isbn) {
+        return bookService.searchBookByISBN(isbn);
     }
 
     @PostMapping(path = "/addBook")
     @Secured("ROLE_LIBRARIAN")
-    public void addBook(@RequestParam(value = "isbn", required = true) String ISBN,
+    public void addBook(@RequestParam(value = "isbn", required = true) String isbn,
                         @RequestParam(value = "title", required = true) String title,
                         @RequestParam(value = "authorLastName", required = true) String authorLastName,
                         @RequestParam(value = "authorFirstName", required = false) String authorFirstName) {
-        if (!bookService.validateISBN(ISBN)) {
+        if (!bookService.validateISBN(isbn)) {
             throw new IllegalArgumentException("Invalide ISBN");
             // check that this doesnt crash program
         } else if (authorFirstName != null) {
-            bookService.addBook(ISBN, title, authorLastName, authorFirstName);
+            bookService.addBook(isbn, title, authorLastName, authorFirstName);
         } else {
-            bookService.addBook(ISBN, title, authorLastName);
+            bookService.addBook(isbn, title, authorLastName);
         }
     }
 
@@ -63,7 +64,8 @@ public class BookController {
     }
 
     @PostMapping(path = "/borrowBook")
-    public void borrowBook(@RequestParam(value = "bookid", required = true) int bookid, @RequestParam(value = "userid", required = true) int userid) {
-        bookService.borrowBook(bookid, userid);
+    @Secured("ROLE_USER")
+    public void borrowBook(@RequestParam(value="bookid",required = true)int bookid,@RequestParam(value="userid",required = true)int userid){
+        bookService.borrowBook(bookid,userid);
     }
 }
