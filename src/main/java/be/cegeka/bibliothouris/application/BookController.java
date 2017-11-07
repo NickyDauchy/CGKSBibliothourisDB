@@ -18,6 +18,7 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping(path = "/searchBookByISBN")
+    @Secured("ROLE_USER")
     public List<Book> searchBookByISBN(@RequestParam(value = "ISBN", required = true) String ISBN) {
         return bookService.searchBookByISBN(ISBN);
     }
@@ -60,6 +61,7 @@ public class BookController {
     }
 
     @PostMapping(path="/borrowBook")
+    @Secured("ROLE_USER")
     public void borrowBook(@RequestParam(value="bookid",required = true)int bookid,@RequestParam(value="userid",required = true)int userid){
         bookService.borrowBook(bookid,userid);
     }
