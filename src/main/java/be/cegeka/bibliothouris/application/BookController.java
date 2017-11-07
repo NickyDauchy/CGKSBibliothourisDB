@@ -17,7 +17,6 @@ public class BookController {
     @Inject
     private BookService bookService;
 
-//    @RequestMapping
     @GetMapping(path = "/searchBookByISBN")
     public List<Book> searchBookByISBN(@RequestParam(value = "ISBN", required = true) String ISBN) {
         return bookService.searchBookByISBN(ISBN);

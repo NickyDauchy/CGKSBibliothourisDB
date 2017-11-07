@@ -30,7 +30,7 @@ public class UserRepositoryTest {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private User seppe, kiki,user, librarian;
+    private User seppe, kiki,user, librarian, admin;
     private UserBuilder userBuilder = new UserBuilder();
 
     @Before
@@ -49,8 +49,9 @@ public class UserRepositoryTest {
 
         user = userRepository.getUserByName("USER");
         librarian = userRepository.getUserByName("LIBRARIAN");
+        admin = userRepository.getUserByName("ADMIN");
 
-        assertThat( query.getResultList()).containsOnly(seppe,kiki,user,librarian);
+        assertThat( query.getResultList()).containsOnly(seppe,kiki,user,librarian,admin);
     }
 
     @Test
