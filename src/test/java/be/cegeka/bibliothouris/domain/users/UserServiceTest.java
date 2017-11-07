@@ -35,9 +35,27 @@ public class UserServiceTest {
 
     @Test
     public void addUser_ShouldCallUserRepository() throws Exception {
-        userService.addUser("Seppe", "password");
+        userService.addUser("Seppe",
+                "password",
+                "INSS",
+                "Dauchy",
+                "Nicky",
+                "whatever",
+                "11",
+                "2840",
+                "Muizen");
 
-        verify(userRepository).addUser(userBuilder.withName("Seppe").withPassWord("password").withUserRole().build());
+        verify(userRepository).addUser(userBuilder.
+                withName("Seppe")
+                .withPassWord("password")
+                .withUserRole().withInss("INSS")
+                .withFirstname("Nicky")
+                .withLastname("Dauchy")
+                .withStreet("whatever")
+                .withHouseNumber("11")
+                .withCity("muizen")
+                .withPostalCode("2840")
+                .buildFull());
     }
 
     @Test
