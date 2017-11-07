@@ -61,7 +61,7 @@ public class BookController {
     }
 
     @PostMapping(path="/borrowBook")
-    public void borrowBook(@RequestParam(value="bookid",required = true)int bookid,@RequestParam(value="userid",required = true)int userid){
-        bookService.borrowBook(bookid,userid);
+    public void borrowBook(@RequestParam(value="isbn",required = true)String isbn,@RequestParam(value="userid",required = true)int userid){
+        bookService.borrowBook(isbn,userid);
     }
 }

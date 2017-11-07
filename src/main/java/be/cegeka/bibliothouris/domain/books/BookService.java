@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -18,8 +19,16 @@ public class BookService {
     public void addBook(String isbn, String title, String authorLastName, String authorFirstName) {
         bookRepository.addBook(new Book(isbn, title, authorLastName, authorFirstName));
     }
-    public void borrowBook(int bookid,int userid){
-        bookRepository.borrowBook(new BorrowedBook(bookid,userid,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now().plusWeeks(3))));
+
+    public void borrowBook(String isbn, int userid) {
+        List<Book> boekenMetDezeISBNLijst = bookRepository.searchBookByISBN(isbn);
+        for (Book book : boekenMetDezeISBNLijst) {
+            if (book.getBorrowable()) {
+                bookRepository.borrowBook(new BorrowedBook(book.getId(), userid, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plusWeeks(3))));
+                book.borrowThisBook();
+                break;
+            }
+        }
     }
 
     public void addBook(String isbn, String title, String authorLastName) {

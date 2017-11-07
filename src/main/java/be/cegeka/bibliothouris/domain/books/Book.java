@@ -1,4 +1,5 @@
 package be.cegeka.bibliothouris.domain.books;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +17,8 @@ public class Book {
     private String authorLastName;
     @Column(name = "AUTHORFIRSTNAME")
     private String authorFirstName;
+    @Column(name = "BORROWABLE")
+    private boolean borrowable = true;
 
     public Book() {
     }
@@ -25,6 +28,7 @@ public class Book {
         this.title = title;
         this.authorLastName = authorLastName;
         this.authorFirstName = authorFirstName;
+        this.borrowable = true;
     }
 
     public int getId() {
@@ -47,6 +51,14 @@ public class Book {
         return authorFirstName;
     }
 
+    public boolean getBorrowable() {
+        return borrowable;
+    }
+
+    protected void borrowThisBook() {
+        borrowable = false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,6 +67,7 @@ public class Book {
         Book book = (Book) o;
 
         if (id != book.id) return false;
+        if (borrowable != book.borrowable) return false;
         if (isbn != null ? !isbn.equals(book.isbn) : book.isbn != null) return false;
         if (title != null ? !title.equals(book.title) : book.title != null) return false;
         if (authorLastName != null ? !authorLastName.equals(book.authorLastName) : book.authorLastName != null)
@@ -69,6 +82,7 @@ public class Book {
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (authorLastName != null ? authorLastName.hashCode() : 0);
         result = 31 * result + (authorFirstName != null ? authorFirstName.hashCode() : 0);
+        result = 31 * result + (borrowable ? 1 : 0);
         return result;
     }
 }

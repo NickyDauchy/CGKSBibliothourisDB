@@ -30,7 +30,7 @@ public class UserRepositoryTest {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private User seppe, kiki,user, librarian;
+    private User seppe, kiki, user, librarian;
     private UserBuilder userBuilder = new UserBuilder();
 
     @Before

@@ -3,5 +3,6 @@ CREATE TABLE Books(
   title VARCHAR(100),
   authorfirstname varchar(100),
   isbn varchar(100),
-  authorlastname varchar(100)
+  authorlastname varchar(100),
+  borrowable BIT
 )

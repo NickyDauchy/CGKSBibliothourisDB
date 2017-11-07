@@ -55,6 +55,7 @@ public class BookRepository {
     public void borrowBook(BorrowedBook borrowedBook){
         entityManager.persist(borrowedBook);
     }
+
     public List<BorrowedBook> getAllBorrowedBooks(){
         return entityManager.createQuery("select c from BorrowedBook c",BorrowedBook.class).getResultList();
     }

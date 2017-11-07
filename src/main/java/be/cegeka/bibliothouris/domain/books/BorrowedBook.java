@@ -21,6 +21,7 @@ public class BorrowedBook {
     private Date duedate;
     @Column(name="RETURNDATE")
     private Date returndate;
+    //isreturned
 
     public BorrowedBook(){
 

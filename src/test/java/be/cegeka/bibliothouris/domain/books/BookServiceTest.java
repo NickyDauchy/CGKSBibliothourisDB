@@ -11,6 +11,8 @@ import org.mockito.junit.MockitoRule;
 
 import javax.inject.Inject;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -93,5 +95,13 @@ public class BookServiceTest {
         when(bookRepository.getBookDetails(testboek1.getId())).thenReturn(testboek1);
 
         assertThat(bookService.getBookDetails(testboek1.getId())).isEqualTo(testboek1);
+    }
+
+    @Test
+    public void ifBorrowBookGetsCalled_shouldCallCorrespondingMethodInBookRepository() throws Exception {
+        Book testboek1 = new Book("123", "testbook1", "romeo", "mattia");
+        when(bookRepository.searchBookByISBN("123")).thenReturn(Arrays.asList(testboek1));
+        bookService.borrowBook("123",35);
+        verify(bookRepository).borrowBook(new BorrowedBook(testboek1.getId(), 35, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now().plusWeeks(3))));
     }
 }

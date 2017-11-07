@@ -99,7 +99,7 @@ public class BookControllerTest {
 
     @Test
     public void borrowBookShouldCallBookService() throws Exception {
-        bookController.borrowBook(1, 1);
-        verify(bookService).borrowBook(1, 1);
+        bookController.borrowBook("1", 1);
+        verify(bookService).borrowBook("1", 1);
     }
 }
