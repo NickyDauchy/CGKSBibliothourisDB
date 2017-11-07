@@ -29,14 +29,14 @@ public class UserRepositoryTest {
 
     @PersistenceContext
     private EntityManager entityManager;
+    private UserBuilder userBuilder= new UserBuilder();
 
-    private User seppe, kiki, user, librarian;
-    private UserBuilder userBuilder = new UserBuilder();
+    private User seppe, kiki,user, librarian, admin;
 
     @Before
     public void setup(){
-        seppe = aUser().withName("Seppe").build();
-        kiki = aUser().withName("Kiki").build();
+        seppe = aUser().withName("Seppe").withInns("123").withCity("leuven").withLastName("Gielen").build();
+        kiki = aUser().withName("Kiki").withInns("12533").withCity("leuven").withLastName("Willems").build();
 
         entityManager.persist(seppe);
         entityManager.persist(kiki);
@@ -49,8 +49,9 @@ public class UserRepositoryTest {
 
         user = userRepository.getUserByName("USER");
         librarian = userRepository.getUserByName("LIBRARIAN");
+        admin = userRepository.getUserByName("ADMIN");
 
-        assertThat( query.getResultList()).containsOnly(seppe,kiki,user,librarian);
+        assertThat( query.getResultList()).containsOnly(seppe,kiki,user,librarian,admin);
     }
 
     @Test

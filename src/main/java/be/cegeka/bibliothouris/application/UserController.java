@@ -18,15 +18,21 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN"})
     public List<User> getUsers() {
         return userService.getAllUsers();
     }
 
     @PostMapping
-    public void addRegisteredUser(@RequestParam(value = "name", required = true) String name,
-                        @RequestParam(value = "password", required = true) String password) {
-        userService.addUser(name, password);
+    public void addRegisteredUser(@RequestParam(value = "name", required = false) String name,
+                        @RequestParam(value = "password", required = false) String password,
+                        @RequestParam(value = "inss", required = true) String inss,
+                        @RequestParam(value = "lastname", required = true) String lastname,
+                        @RequestParam(value = "firstname", required = false) String firstname,
+                        @RequestParam(value = "street", required = false) String street,
+                        @RequestParam(value = "housenumber", required = false) String housenumber,
+                        @RequestParam(value = "postalcode", required = false) String postalcode,
+                        @RequestParam(value = "city", required = true) String city  ) {
+        userService.addUser(name, password,inss, lastname,firstname,street,housenumber,postalcode,city);
     }
-
 }

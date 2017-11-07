@@ -37,24 +37,31 @@ public class BookControllerTest {
 
     @Test
     public void whenAddBook_shouldReturnBookService() throws Exception {
-        bookController.addBook("12345", "Erwins angels", "Boegiewoegie", "Erwin");
-
-        verify(bookService).addBook("12345", "Erwins angels", "Boegiewoegie", "Erwin");
+        when(bookService.validateISBN("978-0-13-235088-4")).thenReturn(true);
+        bookController.addBook("978-0-13-235088-4", "Erwins angels", "Boegiewoegie", "Erwin");
+        verify(bookService).addBook("978-0-13-235088-4", "Erwins angels", "Boegiewoegie", "Erwin");
     }
 
     @Test
     public void whenAddBookWithoutAuthorFirstName_shouldReturnBookService() throws Exception {
-        bookController.addBook("12345", "Erwins angels", "Boegiewoegie",null);
 
-        verify(bookService).addBook("12345", "Erwins angels", "Boegiewoegie");
+        when(bookService.validateISBN("9789401443944")).thenReturn(true);
+        bookController.addBook("9789401443944", "Erwins angels", "Boegiewoegie",null);
+
+        verify(bookService).addBook("9789401443944", "Erwins angels", "Boegiewoegie");
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void whenInvalidISBNReturnsFalse_shouldThrowIllegalArgumentExeption() throws Exception {
+        when(bookService.validateISBN("9789401443944")).thenReturn(false);
+        bookController.addBook("9789401443944", "Erwins angels", "Boegiewoegie",null);
+    }
 
     @Test
     public void getAllBooks() throws Exception {
-        Book book1 = new Book("12345", "Erwins angels", "Boegiewoegie", "Erwin");
-        Book book2 = new Book("12346", "Erwins devils", "Boegiewoegie", "Erwin");
-        Book book3 = new Book("12347", "Erwins demons", "Boegiewoegie", "Erwin");
+        Book book1 = new Book("9789401443944", "Erwins angels", "Boegiewoegie", "Erwin");
+        Book book2 = new Book("9789401443944", "Erwins devils", "Boegiewoegie", "Erwin");
+        Book book3 = new Book("9789401443944", "Erwins demons", "Boegiewoegie", "Erwin");
 
         when(bookService.getAllBooks()).thenReturn(Arrays.asList(book1, book2, book3));
         assertThat(bookController.getAllBooks()).containsOnly(book1, book2, book3);

@@ -17,22 +17,25 @@ public class BookController {
     @Inject
     private BookService bookService;
 
-//    @RequestMapping
     @GetMapping(path = "/searchBookByISBN")
-    public List<Book> searchBookByISBN(@RequestParam(value = "ISBN", required = true) String ISBN) {
-        return bookService.searchBookByISBN(ISBN);
+    @Secured("ROLE_USER")
+    public List<Book> searchBookByISBN(@RequestParam(value = "isbn", required = true) String isbn) {
+        return bookService.searchBookByISBN(isbn);
     }
 
     @PostMapping(path = "/addBook")
     @Secured("ROLE_LIBRARIAN")
-    public void addBook(@RequestParam(value = "isbn", required = true) String ISBN,
+    public void addBook(@RequestParam(value = "isbn", required = true) String isbn,
                         @RequestParam(value = "title", required = true) String title,
                         @RequestParam(value = "authorLastName", required = true) String authorLastName,
                         @RequestParam(value = "authorFirstName", required = false) String authorFirstName) {
-        if (authorFirstName != null) {
-            bookService.addBook(ISBN, title, authorLastName, authorFirstName);
+        if (!bookService.validateISBN(isbn)) {
+            throw new IllegalArgumentException("Invalide ISBN");
+            // check that this doesnt crash program
+        } else if (authorFirstName != null) {
+            bookService.addBook(isbn, title, authorLastName, authorFirstName);
         } else {
-            bookService.addBook(ISBN, title, authorLastName);
+            bookService.addBook(isbn, title, authorLastName);
         }
     }
 
@@ -60,7 +63,8 @@ public class BookController {
         return bookService.searchBookByAuthor(author);
     }
 
-    @PostMapping(path="/borrowBook")
+    @PostMapping(path = "/borrowBook")
+    @Secured("ROLE_USER")
     public void borrowBook(@RequestParam(value="isbn",required = true)String isbn,@RequestParam(value="userid",required = true)int userid){
         bookService.borrowBook(isbn,userid);
     }
