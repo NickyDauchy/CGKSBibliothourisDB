@@ -7,10 +7,22 @@ public class UserTestBuilder {
     private String name;
     private int id;
     private String password;
+    private String role;
+    private String inss;
+    private String lastname;
+    private String firstname;
+    private String street;
+    private String houseNumber;
+    private String postalCode;
+    private String city;
 
     public static UserTestBuilder aUser() {
         return new UserTestBuilder()
-                .withName("Seppe").withPassWord("Password");
+                .withName("Seppe")
+                .withPassWord("Password")
+                .withInns("12335")
+                .withLastName("Gielen")
+                .withCity("Leuven");
     }
 
     public User build() {
@@ -29,9 +41,26 @@ public class UserTestBuilder {
         return this;
     }
 
+
     public UserTestBuilder withPassWord(String password) {
         this.password = password;
         return this;
     }
+
+    public UserTestBuilder withInns(String inss) {
+        this.inss = inss;
+        return this;
+    }
+
+    public UserTestBuilder withLastName(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public UserTestBuilder withCity(String city) {
+        this.city = city;
+        return this;
+    }
+
 
 }
